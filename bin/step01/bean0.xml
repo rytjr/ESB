@@ -1,0 +1,26 @@
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <bean id = "iservice" class = "step01.Step010" init-method = "init">
+        <property name = "if_id" value = "if_id_123456"/>
+        <property name = "metaDataProperties">
+            <props>
+                <prop key = "queueName"><![CDATA[test.QUEUE]]></prop>
+            </props>
+        </property>
+
+        <property name = "beanMap">
+            <map>
+                <entry key = "b1"><ref bean = "bean1"/></entry>
+                <entry key = "b2"><ref bean = "bean2"/></entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id = "bean1" class = "step01.TestBean0">
+        <property name = "name" value = "bean1"/>
+    </bean>
+    <bean id = "bean2" class = "step01.TestBean0">
+        <property name = "name" value = "bean2"/>
+    </bean>
+</beans>

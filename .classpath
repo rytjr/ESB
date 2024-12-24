@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="libs/altibase-jdbc-driver-5.3.3.22.jar"/>
+	<classpathentry kind="lib" path="libs/commons-collections.jar"/>
+	<classpathentry kind="lib" path="libs/commons-dbcp-1.2.2.jar"/>
+	<classpathentry kind="lib" path="libs/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="libs/commons-pool-1.5.4.jar"/>
+	<classpathentry kind="lib" path="libs/geronimo-j2ee_1.4_spec-1.0.jar"/>
+	<classpathentry kind="lib" path="libs/indigomq-core-1.5.jar"/>
+	<classpathentry kind="lib" path="libs/indigomq-pool-1.5.jar"/>
+	<classpathentry kind="lib" path="libs/indigomq-ra-1.5.jar"/>
+	<classpathentry kind="lib" path="libs/jta-synop2004.jar"/>
+	<classpathentry kind="lib" path="libs/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="libs/ojdbc8-21.5.0.0.jar"/>
+	<classpathentry kind="lib" path="libs/quartz-all-1.6.0.jar"/>
+	<classpathentry kind="lib" path="libs/slf4j-log4j12-1.4.3.jar"/>
+	<classpathentry kind="lib" path="libs/spring2.0.6.jar"/>
+	<classpathentry kind="lib" path="libs/xbean-spring-3.2.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
