@@ -17,7 +17,7 @@ public class Step020 {
         log.debug(arg + " :" + i++);
 
         try{
-            Thread.sleep(1000);
+            Thread.sleep(15000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
