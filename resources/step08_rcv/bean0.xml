@@ -1,0 +1,32 @@
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<!-- ========================= BISINESS DEFINITIONS ========================= -->
+	<bean id="iservice" class="step08_rcv.Step08_rcv">
+
+	</bean>
+
+	<!-- ========================= JMS CONNECTION DEFINITIONS ========================= -->
+	<bean id="jmsConnectionFactory" class="com.indigo.indigomq.pool.PooledConnectionFactory"
+		destroy-method="stop">
+		<property name="connectionFactory">
+			<bean class="com.indigo.indigomq.IndigoMQConnectionFactory">
+				<property name="brokerURL">
+					<value>failover:(tcp://localhost:24211)?initialReconnectDelay=5000</value>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<!-- ========================= Message RECEIVE DEFINITIONS ========================= -->
+	<bean id="listenerContaine"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+
+		<property name="messageListener" ref="iservice" />
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+		<property name="destinationName" value="QU.TEST_08" />
+		<property name="concurrentConsumers" value="2" />
+		<property name="messageSelector" value="txid='1234'" />
+		<property name="receiveTimeout" value="3000" />
+	</bean>
+</beans>
