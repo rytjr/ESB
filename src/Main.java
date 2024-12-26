@@ -9,8 +9,8 @@ public class Main {
 //		ctx = new ClassPathXmlApplicationContext("step04/bean0.xml");
 //		ctx = new ClassPathXmlApplicationContext("step05/bean0.xml");
 //		ctx = new ClassPathXmlApplicationContext("step06/bean0.xml");
-		ctx = new ClassPathXmlApplicationContext("step07/bean0.xml");
-//		ctx = new ClassPathXmlApplicationContext("step08_snd/bean.xml");
-//		ctx = new ClassPathXmlApplicationContext("step08_rcv/bean.xml");
+//		ctx = new ClassPathXmlApplicationContext("step07/bean0.xml");
+//		ctx = new ClassPathXmlApplicationContext("step08_snd/bean0.xml");
+		ctx = new ClassPathXmlApplicationContext("step08_rcv/bean0.xml");
 }
 }
