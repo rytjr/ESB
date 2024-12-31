@@ -24,6 +24,7 @@ public class Step07 {
 	private DataSource ds;
 	private String queueName;
     private JmsTemplate jmsTemplate;
+	private String text = "";
 
 	public void onSignal(){
         String msg = getSelect();
