@@ -36,6 +36,7 @@ public class Step081_snd {
         Statement stmt = null;
         ResultSet rs = null;
         String xmlMessage = null;
+        String test = "";
 
         try {
             conn = this.ds.getConnection();
