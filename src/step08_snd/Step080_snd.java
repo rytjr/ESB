@@ -23,6 +23,7 @@ public class Step080_snd {
         log.debug("==== message send ====");
         this.sendMessage(msg);
         log.debug("==== message end ====");
+        log.debug("===== message finish ====");
     }
 
     private String getSelect() {
