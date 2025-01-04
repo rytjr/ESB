@@ -17,6 +17,7 @@ public class Step080_snd {
     private DataSource ds;
     private String queueName;
     private JmsTemplate jmsTemplate;
+    private String name = "";
 
     public void init() {
         String msg = this.getSelect();
