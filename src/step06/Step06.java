@@ -1,5 +1,11 @@
 package step06;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -30,15 +36,39 @@ public class Step06 {
 		try {
 			conn = ds.getConnection();
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("select * from testemp");
+			rs = stmt.executeQuery("select * from RCV_CRW");
 //			rs = stmt.executeQuery("select * from testemp where name='james1'");
 			
 			//리절트셋 rs 에 담긴 레코드 각 건을 <row></row>로 묶기
 			String dbMsg = cvtRsToXml(rs, "row");
-			//<header><body><root>등의 태그를 추가하여 표준 xml로 만들기
-			String xmlMessage = getSendMsg(dbMsg);
 			
-			log.debug("\n\n"+xmlMessage);
+			log.debug("\n\n"+dbMsg);
+
+			// 저장 경로와 파일 이름 지정
+			String directory = "C:/edu/file"; // 저장할 디렉터리 경로
+			String fileName = "20250107.txt"; // 저장할 파일 이름
+			String content = dbMsg;
+
+			try {
+				// 경로 생성 (디렉터리가 없으면 생성)
+				Path path = Paths.get(directory);
+				if (!Files.exists(path)) {
+					Files.createDirectories(path);
+					System.out.println("Directory created: " + path);
+				}
+
+				// 파일 저장
+				String filePath = directory + "/" + fileName;
+				try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+					writer.write(content);
+					writer.newLine();
+					System.out.println("File saved successfully at: " + filePath);
+				}
+
+			} catch (IOException e) {
+				System.out.println("An error occurred while writing the file.");
+				e.printStackTrace();
+			}
 			
 //			while (rs.next()) {
 //				log.debug(rs.getString(1));
@@ -72,12 +102,6 @@ public class Step06 {
 		
 	}
 
-	private String getSendMsg(String dbmsg) {
-		String msg = "<?xml version=\"1.0\"?><root><header><time>"
-				+ System.currentTimeMillis() + "<time></header><body>" + dbmsg
-				+ "</body></root>";
-		return msg;
-	}
 
 	/**
 	 * ResultSet을 XML 로 반환
@@ -94,7 +118,6 @@ public class Step06 {
 			ResultSetMetaData rsmd = rs.getMetaData();
 			while (rs.next()) {
 				String colName = null;
-				result.append("<" + tagName + ">\n"); // start tag
 				for (int i = 1; i <= rsmd.getColumnCount(); i++) {
 					colName = rsmd.getColumnName(i);
 					if (rsmd.getColumnType(i) == Types.CLOB) {
@@ -102,13 +125,16 @@ public class Step06 {
 					} else if (rsmd.getColumnType(i) == Types.LONGVARCHAR) {
 					} else if (rsmd.getColumnType(i) == Types.LONGVARBINARY) {
 					} else {
-						result.append("\t<" + colName + ">");
+						result.append(colName + " : ");
 						result.append(getCdataFormat(checkString(rs
 										.getString(colName))));
-						result.append("</" + colName + ">\n");
+						if(!colName.equals("URL")) {
+							result.append(" | ");
+						}
+
 					}
 				}
-				result.append("</" + tagName + ">"); // end tag
+				result.append("\n");
 			}
 		} finally {
 

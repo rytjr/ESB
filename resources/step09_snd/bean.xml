@@ -1,0 +1,57 @@
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<!-- ===================== BISINESS DEFINITIONS ======================= -->
+	<bean id="iservice" class="step09_snd.Step09_snd" init-method="init">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+		<property name="queueName" value="QU.TEST_09" />
+		<property name="ds" ref="localDs" />
+	</bean>
+
+	<!-- ========================= JMS Template ======================================= -->
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+	</bean>
+
+	<!-- ========================= JMS CONNECTION DEFINITIONS ========================= -->
+	<bean id="jmsConnectionFactory" class="com.indigo.indigomq.pool.PooledConnectionFactory"
+		  destroy-method="stop">
+		<property name="connectionFactory">
+			<bean class="com.indigo.indigomq.IndigoMQConnectionFactory">
+				<property name="brokerURL">
+					<value>failover:(tcp://127.0.0.1:24211)?initialReconnectDelay=5000</value>
+				</property>
+			</bean>
+		</property>
+		<property name="maxConnections" value="5" />
+	</bean>
+
+	<bean id="localDs" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:xe" />
+		<property name="username" value="C##SCOTT" />
+		<property name="password" value="tiger" />
+		<property name="initialSize" value="1" />
+		<property name="testWhileIdle" value="true" />
+		<property name="validationQuery">
+			<value>select 1 from dual</value>
+		</property>
+		<property name="testOnReturn">
+			<value>true</value>
+		</property>
+		<property name="timeBetweenEvictionRunsMillis">
+			<value>10000</value>
+		</property>
+		<property name="defaultAutoCommit" value="false" />
+		<property name="removeAbandoned">
+			<value>true</value>
+		</property>
+		<property name="removeAbandonedTimeout">
+			<value>10</value>
+		</property>
+		<property name="logAbandoned">
+			<value>true</value>
+		</property>
+	</bean>
+</beans>

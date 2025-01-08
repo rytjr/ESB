@@ -10,7 +10,6 @@
 
 	<bean id = "jmsTemplate" class = "org.springframework.jms.core.JmsTemplate">
 		<property name = "connectionFactory" ref = "jmsConnectionFactory"/>
-<!--		<property name="deliveryPersistent" value="false"/>-->
 	</bean>
 
 	<bean id = "jmsConnectionFactory" class = "com.indigo.indigomq.pool.PooledConnectionFactory"

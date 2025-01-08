@@ -174,5 +174,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Spring_어댑터_소스" level="project" />
   </component>
 </module>
